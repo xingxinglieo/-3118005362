@@ -46,7 +46,6 @@ def valueTree(tree):
         # 加号和乘号重排序
         if tree.value in ['+',  '*']:
             if tree.rchild.result != False and tree.lchild.result != False:
-
                 if operate(tree.rchild.result, '-', tree.lchild.result) == False:
                     temp = tree.lchild
                     tree.lchild = tree.rchild
@@ -64,3 +63,9 @@ def tree2prefix(tree):
         traverse(tree.rchild)
     traverse(tree)
     return prefix
+
+
+# 2’1/3 - 5 - 3
+# t = prefix2tree(['4', '-', '2', '/', '1/2', '-', '1’1/3'])
+# valueTree(t)
+# print(t)

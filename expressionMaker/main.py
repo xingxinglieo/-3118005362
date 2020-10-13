@@ -2,6 +2,7 @@
 from expression_maker import expression_producer
 from params import expression_num
 
+
 def main():
     collect = []
     i = 0
@@ -17,12 +18,18 @@ def main():
             collect[len(e.expression)].append(e)
             collectNum += 1
     resuslt = []
-    for c in collect :
-      resuslt.extend(c)
-    text = ''
+    for c in collect:
+        resuslt.extend(c)
+    exercises = ''
+    answer = ''
     for i in range(len(resuslt)):
-      text += (str(i+1) + '、 ' + resuslt[i].expression_add_space + '\n')
-    f = open('Exercises.txt','w')
-    f.write(text)
-    f.close()
+        exercises += (str(i+1) + '. ' + resuslt[i].expression_add_space + '\n')
+        answer += (str(i+1) + '. ' +
+                   resuslt[i].expression_add_space + ' = ' + resuslt[i].tree.result + '\n')
+    f_exercises = open('Exercises.txt', 'w', encoding="utf-8")
+    f_exercises.write(exercises)
+    f_exercises.close()
+    f_answer = open('Answer.txt', 'w', encoding="utf-8")
+    f_answer.write(answer)
+    f_answer.close()
 main()

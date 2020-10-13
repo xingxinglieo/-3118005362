@@ -62,36 +62,33 @@ def expression_maker():
     return expression
 
 # 给乘号和除号加上括号
+# def add_brackets(expression):
+#     expression = expression[:]
 
-
-def add_brackets(expression):
-    expression = expression[:]
-
-    def inner(expression):
-        index = -1
-        for i in range(len(expression)):
-            if expression[i] in ['*', '/']:
-                index = i
-                break
-        if index > -1:
-            expression[index-1:index+2] = [expression[index-1:index+2]]
-            return add_brackets(expression)
-        else:
-            def flat(expression):
-                index = - 1
-                for i in range(len(expression)):
-                    if isinstance(expression[i], list):
-                        index = i
-                if index > -1:
-                    expression[index].insert(0, '(')
-                    expression[index].append(')')
-                    expression[index:index+1] = expression[index]
-                    return flat(expression)
-                else:
-                    return expression
-            return flat(expression)
-    return inner(expression)
-
+#     def inner(expression):
+#         index = -1
+#         for i in range(len(expression)):
+#             if expression[i] in ['*', '/']:
+#                 index = i
+#                 break
+#         if index > -1:
+#             expression[index-1:index+2] = [expression[index-1:index+2]]
+#             return add_brackets(expression)
+#         else:
+#             def flat(expression):
+#                 index = - 1
+#                 for i in range(len(expression)):
+#                     if isinstance(expression[i], list):
+#                         index = i
+#                 if index > -1:
+#                     expression[index].insert(0, '(')
+#                     expression[index].append(')')
+#                     expression[index:index+1] = expression[index]
+#                     return flat(expression)
+#                 else:
+#                     return expression
+#             return flat(expression)
+#     return inner(expression)
 
 class Expression:
     def __init__(self, expression, prefix, tree):
@@ -103,9 +100,8 @@ class Expression:
 
 def expression_producer():
     expression = expression_maker()
-    prefix = infix2prefix(add_brackets(expression))
+    prefix = infix2prefix(expression)
     tree = prefix2tree(prefix)
     valueTree(tree)
     prefix = tree2prefix(tree)
     return Expression(expression, prefix, tree)
-

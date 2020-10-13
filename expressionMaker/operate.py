@@ -30,7 +30,6 @@ def handle_num(num):
 # 9/6 -> 1`1/2
 
 
-
 # 两个数字进行计算
 # 产生负数返回 False
 # 计算过程中除数或者分母为0时返回 False
@@ -65,5 +64,8 @@ def operate(left, operator, right):
         result = [left_numerator, right_numerator]
     if(result[0] < 0 or result[1] == 0):
         return False
-    return format_num(result[0], result[1])
-
+    result = format_num(result[0], result[1])
+    if test_num(result) == False:
+        return False
+    else:
+        return result
